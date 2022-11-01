@@ -11,7 +11,6 @@ from telegram.ext import (
 from dotenv import load_dotenv
 from controller import start
 
-
 def main():
     """"Starts the bot"""
     load_dotenv()
