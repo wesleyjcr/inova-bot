@@ -1,7 +1,7 @@
 import datetime
 import logging
 
-from model import sync_db
+from api_inova import sync_db
 
 # Enables logging
 logging.basicConfig(
@@ -21,5 +21,10 @@ async def error(update, context):
     await logger.warning('Update "%s" caused error "%s"', update, context.error)    
 
 
-async def schedule(update, context):
+async def schedule_sync_db(update, context):
     context.job_queue.run_daily(sync_db, datetime.time(hour= 5, minute= 0, second= 0), days=(0, 1, 2, 3, 4, 5, 6))
+    await context.bot.send_message(
+        chat_id=update.message.chat_id,
+        text="Agendado",
+    )
+
