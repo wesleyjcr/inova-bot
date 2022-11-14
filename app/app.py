@@ -1,4 +1,4 @@
-import os 
+import os
 
 from telegram import Update
 from telegram.ext import (
@@ -6,17 +6,20 @@ from telegram.ext import (
     ApplicationBuilder,
 )
 from dotenv import load_dotenv
-from controller import schedule_sync_db, start
+from controller import schedule_sync_db, start, stop_notify, teste
+
 
 def main():
-    """"Starts the bot"""
+    """ "Starts the bot"""
     load_dotenv()
     TOKEN = os.getenv("TOKEN")
-    #CHANEL = os.getenv("CHANNEL")
+    # CHANEL = os.getenv("CHANNEL")
 
     application = ApplicationBuilder().token(TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("sync", schedule_sync_db))
+    application.add_handler(CommandHandler("stop_jobs", stop_notify))
+    application.add_handler(CommandHandler("test", teste))
     application.run_polling()
 
 
