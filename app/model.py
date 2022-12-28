@@ -10,3 +10,7 @@ def count_all_documents(page):
 
 def insert_documents(page, data):
     return db[page].insert_one(data)
+
+
+def get_course(page):
+    return db[page].find_one()
